@@ -1,0 +1,978 @@
+{
+  "entorno": {
+    "node": "v22.23.4",
+    "cpus": 2,
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "ramGB": 8.4,
+    "fecha": "2026-11-09T16:13:22.710Z",
+    "totalPorPrueba": 1500
+  },
+  "e1": [
+    {
+      "nodes": 1,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 19.09,
+      "throughput": 78.59,
+      "latency": {
+        "avg": 403.1,
+        "p50": 404.69,
+        "p95": 427.96,
+        "p99": 437.51,
+        "max": 474.13
+      },
+      "perNode": {
+        "nodo-1": 1500
+      }
+    },
+    {
+      "nodes": 2,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 9.82,
+      "throughput": 152.75,
+      "latency": {
+        "avg": 207.45,
+        "p50": 206.25,
+        "p95": 232.15,
+        "p99": 264.33,
+        "max": 286.31
+      },
+      "perNode": {
+        "nodo-1": 754,
+        "nodo-2": 746
+      }
+    },
+    {
+      "nodes": 3,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 7.1,
+      "throughput": 211.21,
+      "latency": {
+        "avg": 149.88,
+        "p50": 148.46,
+        "p95": 176.26,
+        "p99": 200.28,
+        "max": 270.76
+      },
+      "perNode": {
+        "nodo-3": 497,
+        "nodo-2": 501,
+        "nodo-1": 502
+      }
+    },
+    {
+      "nodes": 4,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 5.92,
+      "throughput": 253.21,
+      "latency": {
+        "avg": 125.31,
+        "p50": 125.69,
+        "p95": 145.93,
+        "p99": 159.77,
+        "max": 225.16
+      },
+      "perNode": {
+        "nodo-3": 375,
+        "nodo-1": 374,
+        "nodo-2": 376,
+        "nodo-4": 375
+      }
+    }
+  ],
+  "e2": [
+    {
+      "variant": "v1: hilo principal, round-robin, sin keep-alive",
+      "name": "v1: hilo principal, round-robin, sin keep-alive",
+      "poolSize": 0,
+      "strategy": "round-robin",
+      "keepAlive": false,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 19.42,
+      "throughput": 77.25,
+      "latency": {
+        "avg": 409.66,
+        "p50": 415.38,
+        "p95": 444.12,
+        "p99": 455.08,
+        "max": 460.55
+      },
+      "perNode": {
+        "nodo-1": 750,
+        "nodo-2": 750
+      }
+    },
+    {
+      "variant": "v1.1: + pool de 2 hilos",
+      "name": "v1.1: + pool de 2 hilos",
+      "poolSize": 2,
+      "strategy": "round-robin",
+      "keepAlive": false,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 10.27,
+      "throughput": 146.08,
+      "latency": {
+        "avg": 216.77,
+        "p50": 213.65,
+        "p95": 260.41,
+        "p99": 270.55,
+        "max": 316.41
+      },
+      "perNode": {
+        "nodo-1": 750,
+        "nodo-2": 750
+      }
+    },
+    {
+      "variant": "v1.2: + keep-alive",
+      "name": "v1.2: + keep-alive",
+      "poolSize": 2,
+      "strategy": "round-robin",
+      "keepAlive": true,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 9.76,
+      "throughput": 153.75,
+      "latency": {
+        "avg": 205.61,
+        "p50": 204.25,
+        "p95": 249.07,
+        "p99": 258.69,
+        "max": 279.6
+      },
+      "perNode": {
+        "nodo-1": 750,
+        "nodo-2": 750
+      }
+    },
+    {
+      "variant": "v2: + least-loaded",
+      "name": "v2: + least-loaded",
+      "poolSize": 2,
+      "strategy": "least-loaded",
+      "keepAlive": true,
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 9.88,
+      "throughput": 151.82,
+      "latency": {
+        "avg": 208.53,
+        "p50": 207.96,
+        "p95": 229.7,
+        "p99": 240.46,
+        "max": 269.86
+      },
+      "perNode": {
+        "nodo-1": 750,
+        "nodo-2": 750
+      }
+    }
+  ],
+  "e3": [
+    {
+      "strategy": "round-robin",
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 21.45,
+      "throughput": 69.92,
+      "latency": {
+        "avg": 443.73,
+        "p50": 29.51,
+        "p95": 1325.37,
+        "p99": 1338.25,
+        "max": 1359.6
+      },
+      "perNode": {
+        "nodo-2": 500,
+        "nodo-1": 500,
+        "nodo-3": 500
+      }
+    },
+    {
+      "strategy": "least-loaded",
+      "total": 1500,
+      "concurrency": 32,
+      "ok": 1500,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 9.04,
+      "throughput": 165.86,
+      "latency": {
+        "avg": 186.4,
+        "p50": 141.99,
+        "p95": 505.58,
+        "p99": 531.96,
+        "max": 573.53
+      },
+      "perNode": {
+        "nodo-2": 648,
+        "nodo-1": 648,
+        "nodo-3": 204
+      }
+    }
+  ],
+  "e4": [
+    {
+      "concurrency": 4,
+      "total": 600,
+      "ok": 600,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 4.09,
+      "throughput": 146.84,
+      "latency": {
+        "avg": 27.17,
+        "p50": 26.63,
+        "p95": 31.17,
+        "p99": 33.28,
+        "max": 40.54
+      },
+      "perNode": {
+        "nodo-1": 300,
+        "nodo-2": 300
+      }
+    },
+    {
+      "concurrency": 8,
+      "total": 600,
+      "ok": 600,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 3.93,
+      "throughput": 152.63,
+      "latency": {
+        "avg": 52.06,
+        "p50": 51.51,
+        "p95": 60.93,
+        "p99": 66.34,
+        "max": 75.33
+      },
+      "perNode": {
+        "nodo-2": 298,
+        "nodo-1": 302
+      }
+    },
+    {
+      "concurrency": 16,
+      "total": 600,
+      "ok": 600,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 3.85,
+      "throughput": 155.97,
+      "latency": {
+        "avg": 101.17,
+        "p50": 100.38,
+        "p95": 114.7,
+        "p99": 121.99,
+        "max": 132.4
+      },
+      "perNode": {
+        "nodo-2": 301,
+        "nodo-1": 299
+      }
+    },
+    {
+      "concurrency": 32,
+      "total": 600,
+      "ok": 600,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 3.79,
+      "throughput": 158.35,
+      "latency": {
+        "avg": 196.88,
+        "p50": 199.77,
+        "p95": 210,
+        "p99": 215.9,
+        "max": 235.33
+      },
+      "perNode": {
+        "nodo-2": 301,
+        "nodo-1": 299
+      }
+    },
+    {
+      "concurrency": 64,
+      "total": 640,
+      "ok": 640,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 4.18,
+      "throughput": 153,
+      "latency": {
+        "avg": 398.63,
+        "p50": 409.31,
+        "p95": 452.73,
+        "p99": 460.44,
+        "max": 471.87
+      },
+      "perNode": {
+        "nodo-1": 320,
+        "nodo-2": 320
+      }
+    },
+    {
+      "concurrency": 128,
+      "total": 1280,
+      "ok": 1280,
+      "failed": 0,
+      "errors": {},
+      "failovers": 0,
+      "seconds": 8.1,
+      "throughput": 158.02,
+      "latency": {
+        "avg": 768.32,
+        "p50": 802.98,
+        "p95": 826.03,
+        "p99": 834.91,
+        "max": 865.2
+      },
+      "perNode": {
+        "nodo-1": 640,
+        "nodo-2": 640
+      }
+    }
+  ],
+  "e5": {
+    "total": 3000,
+    "concurrency": 24,
+    "ok": 3000,
+    "failed": 0,
+    "errors": {},
+    "failovers": 8,
+    "seconds": 15.3,
+    "throughput": 196.03,
+    "latency": {
+      "avg": 122,
+      "p50": 113.3,
+      "p95": 160.6,
+      "p99": 184.37,
+      "max": 228.34
+    },
+    "perNode": {
+      "nodo-3": 1105,
+      "nodo-2": 784,
+      "nodo-1": 1111
+    },
+    "crashAt": 2000,
+    "restartAt": 6005,
+    "evictions": 1,
+    "groupFailovers": 8,
+    "nodesAtEnd": [
+      "nodo-1",
+      "nodo-3",
+      "nodo-2"
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "throughput": 196,
+        "failed": 0,
+        "p95": 134.436518
+      },
+      {
+        "t": 0.25,
+        "throughput": 232,
+        "failed": 0,
+        "p95": 113.922538
+      },
+      {
+        "t": 0.5,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 134.943287
+      },
+      {
+        "t": 0.75,
+        "throughput": 212,
+        "failed": 0,
+        "p95": 128.169939
+      },
+      {
+        "t": 1,
+        "throughput": 224,
+        "failed": 0,
+        "p95": 116.4909
+      },
+      {
+        "t": 1.25,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 118.272122
+      },
+      {
+        "t": 1.5,
+        "throughput": 228,
+        "failed": 0,
+        "p95": 121.535571
+      },
+      {
+        "t": 1.75,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 127.65788
+      },
+      {
+        "t": 2,
+        "throughput": 156,
+        "failed": 0,
+        "p95": 218.483992
+      },
+      {
+        "t": 2.25,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 164.262522
+      },
+      {
+        "t": 2.5,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 170.241642
+      },
+      {
+        "t": 2.75,
+        "throughput": 164,
+        "failed": 0,
+        "p95": 156.127648
+      },
+      {
+        "t": 3,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 162.047229
+      },
+      {
+        "t": 3.25,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 165.50471
+      },
+      {
+        "t": 3.5,
+        "throughput": 160,
+        "failed": 0,
+        "p95": 159.764933
+      },
+      {
+        "t": 3.75,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 158.131475
+      },
+      {
+        "t": 4,
+        "throughput": 156,
+        "failed": 0,
+        "p95": 156.198434
+      },
+      {
+        "t": 4.25,
+        "throughput": 144,
+        "failed": 0,
+        "p95": 182.876964
+      },
+      {
+        "t": 4.5,
+        "throughput": 156,
+        "failed": 0,
+        "p95": 189.810334
+      },
+      {
+        "t": 4.75,
+        "throughput": 148,
+        "failed": 0,
+        "p95": 164.006378
+      },
+      {
+        "t": 5,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 172.096709
+      },
+      {
+        "t": 5.25,
+        "throughput": 160,
+        "failed": 0,
+        "p95": 158.725502
+      },
+      {
+        "t": 5.5,
+        "throughput": 152,
+        "failed": 0,
+        "p95": 166.356201
+      },
+      {
+        "t": 5.75,
+        "throughput": 156,
+        "failed": 0,
+        "p95": 164.582504
+      },
+      {
+        "t": 6,
+        "throughput": 144,
+        "failed": 0,
+        "p95": 210.034867
+      },
+      {
+        "t": 6.25,
+        "throughput": 220,
+        "failed": 0,
+        "p95": 182.379973
+      },
+      {
+        "t": 6.5,
+        "throughput": 212,
+        "failed": 0,
+        "p95": 123.697749
+      },
+      {
+        "t": 6.75,
+        "throughput": 228,
+        "failed": 0,
+        "p95": 119.800516
+      },
+      {
+        "t": 7,
+        "throughput": 228,
+        "failed": 0,
+        "p95": 117.408835
+      },
+      {
+        "t": 7.25,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 124.786007
+      },
+      {
+        "t": 7.5,
+        "throughput": 144,
+        "failed": 0,
+        "p95": 158.218331
+      },
+      {
+        "t": 7.75,
+        "throughput": 200,
+        "failed": 0,
+        "p95": 192.255041
+      },
+      {
+        "t": 8,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 130.089998
+      },
+      {
+        "t": 8.25,
+        "throughput": 200,
+        "failed": 0,
+        "p95": 143.050804
+      },
+      {
+        "t": 8.5,
+        "throughput": 220,
+        "failed": 0,
+        "p95": 144.061493
+      },
+      {
+        "t": 8.75,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 126.304983
+      },
+      {
+        "t": 9,
+        "throughput": 232,
+        "failed": 0,
+        "p95": 115.720717
+      },
+      {
+        "t": 9.25,
+        "throughput": 232,
+        "failed": 0,
+        "p95": 115.760196
+      },
+      {
+        "t": 9.5,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 123.105327
+      },
+      {
+        "t": 9.75,
+        "throughput": 212,
+        "failed": 0,
+        "p95": 128.282672
+      },
+      {
+        "t": 10,
+        "throughput": 204,
+        "failed": 0,
+        "p95": 131.904898
+      },
+      {
+        "t": 10.25,
+        "throughput": 232,
+        "failed": 0,
+        "p95": 119.106293
+      },
+      {
+        "t": 10.5,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 124.025482
+      },
+      {
+        "t": 10.75,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 120.706878
+      },
+      {
+        "t": 11,
+        "throughput": 220,
+        "failed": 0,
+        "p95": 130.739122
+      },
+      {
+        "t": 11.25,
+        "throughput": 208,
+        "failed": 0,
+        "p95": 129.034523
+      },
+      {
+        "t": 11.5,
+        "throughput": 204,
+        "failed": 0,
+        "p95": 124.923078
+      },
+      {
+        "t": 11.75,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 136.507641
+      },
+      {
+        "t": 12,
+        "throughput": 220,
+        "failed": 0,
+        "p95": 120.104886
+      },
+      {
+        "t": 12.25,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 116.427808
+      },
+      {
+        "t": 12.5,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 121.587574
+      },
+      {
+        "t": 12.75,
+        "throughput": 236,
+        "failed": 0,
+        "p95": 110.991021
+      },
+      {
+        "t": 13,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 123.843764
+      },
+      {
+        "t": 13.25,
+        "throughput": 224,
+        "failed": 0,
+        "p95": 121.004379
+      },
+      {
+        "t": 13.5,
+        "throughput": 196,
+        "failed": 0,
+        "p95": 154.529874
+      },
+      {
+        "t": 13.75,
+        "throughput": 220,
+        "failed": 0,
+        "p95": 129.140303
+      },
+      {
+        "t": 14,
+        "throughput": 196,
+        "failed": 0,
+        "p95": 144.31322
+      },
+      {
+        "t": 14.25,
+        "throughput": 216,
+        "failed": 0,
+        "p95": 123.385916
+      },
+      {
+        "t": 14.5,
+        "throughput": 188,
+        "failed": 0,
+        "p95": 143.656749
+      },
+      {
+        "t": 14.75,
+        "throughput": 188,
+        "failed": 0,
+        "p95": 156.97452
+      },
+      {
+        "t": 15,
+        "throughput": 212,
+        "failed": 0,
+        "p95": 139.882876
+      },
+      {
+        "t": 15.25,
+        "throughput": 48,
+        "failed": 0,
+        "p95": 127.63351
+      }
+    ]
+  },
+  "e6": {
+    "crashAt": 0,
+    "brokerRestartAt": 795,
+    "nodesBackAt": 1310,
+    "recoveredAt": 2271,
+    "breaker": {
+      "calls": 125,
+      "rejected": 19,
+      "failures": 5,
+      "opened": 1
+    },
+    "calls": [
+      {
+        "i": 1,
+        "t": 8,
+        "status": 503,
+        "ms": 5.74,
+        "circuit": "CLOSED"
+      },
+      {
+        "i": 2,
+        "t": 60,
+        "status": 503,
+        "ms": 1.47,
+        "circuit": "CLOSED"
+      },
+      {
+        "i": 3,
+        "t": 113,
+        "status": 503,
+        "ms": 1.72,
+        "circuit": "CLOSED"
+      },
+      {
+        "i": 4,
+        "t": 166,
+        "status": 503,
+        "ms": 1.73,
+        "circuit": "CLOSED"
+      },
+      {
+        "i": 5,
+        "t": 219,
+        "status": 503,
+        "ms": 1.67,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 6,
+        "t": 272,
+        "status": 503,
+        "ms": 1.14,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 7,
+        "t": 324,
+        "status": 503,
+        "ms": 1.13,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 8,
+        "t": 377,
+        "status": 503,
+        "ms": 1.22,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 9,
+        "t": 429,
+        "status": 503,
+        "ms": 1.06,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 10,
+        "t": 481,
+        "status": 503,
+        "ms": 0.99,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 11,
+        "t": 534,
+        "status": 503,
+        "ms": 1.05,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 12,
+        "t": 586,
+        "status": 503,
+        "ms": 1.04,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 13,
+        "t": 639,
+        "status": 503,
+        "ms": 1.21,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 14,
+        "t": 690,
+        "status": 503,
+        "ms": 1.16,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 15,
+        "t": 742,
+        "status": 503,
+        "ms": 0.98,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 16,
+        "t": 1313,
+        "status": 503,
+        "ms": 0.73,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 17,
+        "t": 1416,
+        "status": 503,
+        "ms": 0.9,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 18,
+        "t": 1518,
+        "status": 503,
+        "ms": 0.98,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 19,
+        "t": 1622,
+        "status": 503,
+        "ms": 1.02,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 20,
+        "t": 1724,
+        "status": 503,
+        "ms": 1.2,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 21,
+        "t": 1827,
+        "status": 503,
+        "ms": 0.94,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 22,
+        "t": 1930,
+        "status": 503,
+        "ms": 1,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 23,
+        "t": 2033,
+        "status": 503,
+        "ms": 0.9,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 24,
+        "t": 2135,
+        "status": 503,
+        "ms": 1.1,
+        "circuit": "OPEN"
+      },
+      {
+        "i": 25,
+        "t": 2271,
+        "status": 200,
+        "ms": 34.02,
+        "circuit": "CLOSED"
+      }
+    ]
+  }
+}

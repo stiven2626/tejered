@@ -1,0 +1,51 @@
+@startuml
+!include _estilo.iuml
+title Diagrama de secuencia — publicación de un mensaje con hilos y failover
+autonumber
+actor Cliente
+participant "API Gateway\n(Proxy)" as GW
+participant "CircuitBreaker" as CB
+participant "Broker\n(Mediator)" as BR
+participant "Topic 'pedidos'\n(Subject)" as TP
+participant "ConsumerGroup\nfacturacion\n(Observer)" as G1
+participant "Nodo-1" as N1
+participant "Nodo-2" as N2
+participant "ThreadPool\nNodo-2" as POOL
+
+== Registro y heartbeat (en segundo plano) ==
+N1 -> BR : POST /register {id, url, suscripciones}
+N2 -> BR : POST /register
+loop cada 1 s
+  N2 -> BR : POST /heartbeat {id, carga}
+end
+
+== Publicación ==
+Cliente -> GW : POST /api/messages {topic, payload} + x-api-key
+GW -> GW : valida API key y formato
+alt API key inválida
+  GW --> Cliente : 401
+end
+GW -> CB : exec(publish)
+CB -> BR : POST /publish
+BR -> TP : notify(mensaje)
+par a cada grupo observador
+  TP -> G1 : update(mensaje)
+  G1 -> G1 : strategy.pick() → Nodo-1 (menos carga)
+  G1 -> N1 : POST /deliver
+  N1 -x G1 : ECONNRESET (nodo caído)
+  G1 -> BR : onNodeFailure(nodo-1) → expulsar
+  G1 -> G1 : strategy.pick(excluye nodo-1) → Nodo-2
+  G1 -> N2 : POST /deliver
+  N2 -> POOL : submit(mensaje)
+  activate POOL
+  POOL -> POOL : hilo libre procesa\n(CPU + E/S)
+  POOL --> N2 : resultado {threadId}
+  deactivate POOL
+  N2 --> G1 : 200 {nodeId, resultado}
+  G1 --> TP : {nodo: nodo-2, intentos: 2}
+end
+TP --> BR : entregas[]
+BR --> CB : 200 {messageId, entregas}
+CB --> GW : éxito (circuito CLOSED)
+GW --> Cliente : 200 {entregas, gatewayMs}
+@enduml

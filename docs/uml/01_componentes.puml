@@ -1,0 +1,54 @@
+@startuml
+!include _estilo.iuml
+title Diagrama de componentes — TejeRed
+
+actor "Cliente / Productor" as cliente
+interface "REST\nPOST /api/messages" as iapi
+
+package "Capa de acceso" {
+  component "API Gateway <<Proxy>>" as gw {
+    [ApiGatewayProxy] as agp
+    [CircuitBreaker] as cb
+    [BrokerClient] as bc
+  }
+}
+interface "POST /publish" as ipub
+interface "POST /register\nPOST /heartbeat" as ireg
+
+package "Capa de coordinación" {
+  component "Broker <<Mediator>>" as broker {
+    [MessageMediator] as med
+    [Topic <<Subject>>] as topic
+    [ConsumerGroup <<Observer>>] as cg
+    [RemoteNodeProxy <<Proxy remoto>>] as rnp
+    [LoadBalancingStrategy <<Strategy>>] as st
+  }
+}
+interface "POST /deliver" as idel
+
+package "Capa de procesamiento (N réplicas)" {
+  component "Nodo worker" as nodo {
+    [NodeServer] as ns
+    [ThreadPool <<Thread Pool>>] as tp
+    [Hilos worker_threads] as th
+    [Heartbeat] as hb
+  }
+}
+
+cliente -down-> iapi
+iapi -down- agp
+agp -right-> cb
+cb -right-> bc
+bc -down-> ipub
+ipub -down- med
+med -down-> topic
+topic -down-> cg : notify()
+cg -left-> st : pick()
+cg -down-> rnp : deliver()
+rnp -down-> idel
+idel -down- ns
+ns -right-> tp : submit()
+tp -right-> th
+hb -up-> ireg
+ireg -up- med
+@enduml

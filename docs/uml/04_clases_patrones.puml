@@ -1,0 +1,84 @@
+@startuml
+!include _estilo.iuml
+title Diagrama de clases — patrones de diseño aplicados
+hide empty members
+skinparam linetype ortho
+
+package "Gateway" {
+  interface Publicador {
+    +publish(msg)
+  }
+  class BrokerClient <<RealSubject remoto>> {
+    +publish(msg)
+  }
+  class ApiGatewayProxy <<Proxy>> {
+    -apiKey
+    +authorize(req)
+    +validate(msg)
+    +publish(req,res)
+  }
+  class CircuitBreaker <<Circuit Breaker>> {
+    -state: CLOSED/OPEN/HALF_OPEN
+    -failures
+    +exec(fn)
+  }
+  Publicador <|.. BrokerClient
+  Publicador <|.. ApiGatewayProxy
+  ApiGatewayProxy o-- BrokerClient
+  ApiGatewayProxy o-- CircuitBreaker
+}
+
+package "Broker" {
+  class MessageMediator <<Mediator>> {
+    +register(nodo)
+    +heartbeat(id)
+    +sweep()
+    +publish(msg)
+    +onNodeFailure(id)
+  }
+  class Topic <<Subject>> {
+    +attach(grupo)
+    +detach(nombre)
+    +notify(msg)
+  }
+  class ConsumerGroup <<Observer>> {
+    +update(msg)
+    -maxAttempts
+  }
+  interface LoadBalancingStrategy <<Strategy>> {
+    +pick(grupo, miembros, excluidos)
+  }
+  class RoundRobinStrategy
+  class LeastLoadedStrategy
+  class RemoteNodeProxy <<Proxy remoto>> {
+    +deliver(msg)
+  }
+  MessageMediator "1" *-- "*" Topic
+  Topic "1" o-- "*" ConsumerGroup : observadores
+  ConsumerGroup --> LoadBalancingStrategy
+  LoadBalancingStrategy <|.. RoundRobinStrategy
+  LoadBalancingStrategy <|.. LeastLoadedStrategy
+  ConsumerGroup "1" o-- "*" RemoteNodeProxy
+}
+
+package "Nodo worker" {
+  class WorkerNode {
+    +deliver(msg)
+    +heartbeat()
+  }
+  class ThreadPool <<Thread Pool>> {
+    -queue
+    -idle
+    +submit(msg)
+    +load()
+  }
+  class WorkerThread {
+    +processMessage()
+  }
+  WorkerNode o-- ThreadPool
+  ThreadPool "1" *-- "n" WorkerThread
+}
+
+RemoteNodeProxy ..> WorkerNode : HTTP /deliver
+BrokerClient ..> MessageMediator : HTTP /publish
+@enduml

@@ -1,0 +1,36 @@
+# Despliegue en contenedores: cada componente es un nodo de red independiente.
+# docker compose up --build --scale worker=3   (las réplicas se registran solas en el broker)
+services:
+  broker:
+    build: .
+    command: node src/broker/broker.js
+    environment:
+      BROKER_PORT: "4000"
+      LB_STRATEGY: least-loaded
+    networks: [tejered]
+
+  gateway:
+    build: .
+    command: node src/gateway/gateway.js
+    environment:
+      GATEWAY_PORT: "3000"
+      BROKER_URL: http://broker:4000
+      API_KEY: tejered-demo-key
+    ports: ["3000:3000"]
+    depends_on: [broker]
+    networks: [tejered]
+
+  worker:
+    build: .
+    # NODE_ID y NODE_HOST toman el hostname del contenedor para que cada réplica sea única
+    command: sh -c 'NODE_ID=$$(hostname) NODE_HOST=$$(hostname) node src/node/worker-node.js'
+    environment:
+      NODE_PORT: "5001"
+      BROKER_URL: http://broker:4000
+      POOL_SIZE: "2"
+      SUBSCRIPTIONS: tareas:procesadores,pedidos:facturacion,pedidos:notificaciones
+    depends_on: [broker]
+    networks: [tejered]
+
+networks:
+  tejered: {}

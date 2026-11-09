@@ -1,0 +1,21 @@
+skinparam defaultFontName DejaVu Sans
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #52514e
+skinparam defaultFontColor #0b0b0b
+skinparam componentBorderColor #2a78d6
+skinparam componentBackgroundColor #EAF2FC
+skinparam interfaceBorderColor #2a78d6
+skinparam nodeBorderColor #52514e
+skinparam nodeBackgroundColor #F7F7F4
+skinparam packageBorderColor #898781
+skinparam noteBackgroundColor #FFF6E0
+skinparam noteBorderColor #eda100
+skinparam classBorderColor #2a78d6
+skinparam classBackgroundColor #F4F8FD
+skinparam sequenceParticipantBorderColor #2a78d6
+skinparam sequenceParticipantBackgroundColor #EAF2FC
+skinparam sequenceLifeLineBorderColor #898781
+skinparam sequenceGroupBorderColor #898781
+skinparam sequenceGroupBackgroundColor #F7F7F4
+skinparam databaseBorderColor #52514e

@@ -1,0 +1,19 @@
+{
+  "name": "tejered",
+  "version": "2.0.0",
+  "description": "TejeRed: sistema distribuido de mensajería (Gateway Proxy + Broker Mediator/Observer + nodos con pool de hilos). Mini proyecto U2 Arquitectura de Software.",
+  "main": "src/simulation/start.js",
+  "scripts": {
+    "start": "node src/simulation/start.js",
+    "demo": "node src/simulation/demo.js",
+    "test": "node --test",
+    "loadtest": "node src/simulation/loadtest.js --total 1000 --concurrency 32",
+    "experiments": "node src/simulation/experiments.js",
+    "gateway": "node src/gateway/gateway.js",
+    "broker": "node src/broker/broker.js",
+    "node": "node src/node/worker-node.js"
+  },
+  "engines": { "node": ">=18" },
+  "author": "Yeison Stiven Gutiérrez Rozo, Michael Yesid Torres Bello",
+  "license": "MIT"
+}
